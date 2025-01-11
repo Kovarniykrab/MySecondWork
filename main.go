@@ -142,7 +142,7 @@ func (w Walking) Calories() float64 {
 	if w.Duration == 0 {
 		return 0.0
 	} else {
-		return ((CaloriesWeightMultiplier*w.WeightHuman + (math.Pow(w.meanSpeed(), 2)/w.Height/CmInM)*CaloriesSpeedHeightMultiplier*w.WeightHuman) * w.Duration.Hours() * MinInHours)
+		return ((CaloriesWeightMultiplier*w.WeightHuman + ((math.Pow(w.meanSpeed()*KmHInMsec, 2))/w.Height/CmInM)*CaloriesSpeedHeightMultiplier*w.WeightHuman) * float64(w.Duration.Hours()) * MinInHours)
 	}
 }
 
@@ -188,7 +188,7 @@ func (s Swimming) Calories() float64 {
 	if s.Duration == 0 {
 		return 0.0
 	} else {
-		return (s.MeanSpeed() + SwimmingCaloriesMeanSpeedShift) * SwimmingCaloriesWeightMultiplier * float64(s.WeightHuman) * s.Duration.Hours()
+		return (s.MeanSpeed() + SwimmingCaloriesMeanSpeedShift) * SwimmingCaloriesWeightMultiplier * s.WeightHuman * s.Duration.Hours()
 	}
 }
 
